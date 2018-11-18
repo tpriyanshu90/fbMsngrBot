@@ -1,0 +1,22 @@
+{
+  "name": "Start on Heroku: Python",
+  "description": "A facebook messenger Bot",
+  "image": "heroku/python",
+  "repository": "",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "The secret key for the Django application.",
+      "generator": "secret"
+    },
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "python app.py",
+        "test": "python app.py"
+      }
+    }
+  }
+}

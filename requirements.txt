@@ -1,0 +1,6 @@
+gunicorn
+slackclient
+translate
+requests
+chatterbot
+Flask
