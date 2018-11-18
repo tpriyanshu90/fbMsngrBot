@@ -51,7 +51,8 @@ def receive_message():
     					response_sent_text = get_message(message['message'].get('text'))
     					send_message(recipient_id, response_sent_text)
     				if message['message'].get('attachments'):
-    					response_sent_nontext = get_message()
+    					#response_sent_nontext = get_message()
+                        response_sent_nontext = random.choice(PICTURE_COMMENTS)
     					send_message(recipient_id, response_sent_nontext)
     return "Message Processed"
 

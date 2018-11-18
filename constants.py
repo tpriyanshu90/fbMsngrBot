@@ -197,3 +197,4 @@ To translate use: translate I am a boy in German \
 \nTo find temperature use: temperature in CityName \
 "
 CHANNEL_NAME = "DDU3ECX0U"
+PICTURE_COMMENTS = ["Nice Picture", "Fantastic", "Amazing", "Cool","this looks gorgeous", "My words are less to describe this picture.","This picture is worth a thousand words.","Impressive picture."]
