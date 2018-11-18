@@ -1,1 +1,1 @@
-web: gunicorn fbMsngrBot:app
+web: gunicorn app.py
