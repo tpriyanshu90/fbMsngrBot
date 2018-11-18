@@ -4,3 +4,4 @@ translate
 requests
 chatterbot
 Flask
+pymessenger
