@@ -157,5 +157,4 @@ def send_message(recipient_id, response):
 # --------------------------------------------DRIVER PROGRAM---------------------------
 
 if __name__ == "__main__":
-    port = int(process.env.PORT)
     app.run(debug=True, port=33507)
