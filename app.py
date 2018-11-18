@@ -53,7 +53,7 @@ def receive_message():
     				if message['message'].get('attachments'):
     					#response_sent_nontext = get_message()
                         response_sent_nontext = random.choice(PICTURE_COMMENTS)
-    					send_message(recipient_id, response_sent_nontext)
+                        send_message(recipient_id, response_sent_nontext)
     return "Message Processed"
 
 @app.route("/privacy_policy",methods=['GET','POST'])
