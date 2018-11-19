@@ -124,8 +124,8 @@ def handleFunction(command,func):
 
 		elif re.search(r"(.)* ?horoscope ?(.)*",command,re.I):
 			for sign in ZODIAC_SIGNS:
-				if re.search(r'\b'+sign+r'\b',s,re.I):
-					zodiac_sign = re.search(r'\b'+sign+r'\b',s,re.I).group(0)
+				if re.search(r'\b'+sign+r'\b',command,re.I):
+					zodiac_sign = re.search(r'\b'+sign+r'\b',command,re.I).group(0)
 					API_response = requests.get(url = "http://horoscope-api.herokuapp.com/horoscope/today/"+zodiac_sign)
 					return API_response.json()['horoscope']
 			return "Please choose appropriate zodiac sign"
