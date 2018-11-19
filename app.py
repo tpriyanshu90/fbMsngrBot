@@ -149,8 +149,12 @@ def get_message(command):
 			answer = handleFunction(command,i)
 			if answer:
 				response = answer
+	if re.search(r"(.)* ?horoscope ?(.)*",command,re.I):
+		answer = handleFunction(command,"horoscope")
+
 	if re.search(r"(?i)"+command," ".join(PRAISES)):
 		response = random.choice(PRAISES_RESPONSE)
+	
 	if response==None:
 		response = chatbot.get_response(command)
 	return str(response)
