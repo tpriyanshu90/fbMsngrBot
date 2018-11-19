@@ -198,4 +198,4 @@ To translate use: translate I am a boy in German \
 "
 CHANNEL_NAME = "DDU3ECX0U"
 PICTURE_COMMENTS = ["Nice Picture", "Fantastic", "Amazing", "Cool","this looks gorgeous", "My words are less to describe this picture.","This picture is worth a thousand words.","Impressive picture."]
-ZODIAC_SIGNS = ["ARIES","TAURUS","GEMINI","CANCER","LEO","VIRGO","LIBRA","SCORPIUS","SAGITTARIUS","CAPRICORN","AQUARIUS","PISCES"] 
+ZODIAC_SIGNS = ["ARIES","TAURUS","GEMINI","CANCER","LEO","VIRGO","LIBRA","SCORPIO","SAGITTARIUS","CAPRICORN","AQUARIUS","PISCES"] 
