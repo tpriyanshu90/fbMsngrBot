@@ -37,23 +37,23 @@ chatbot.train(conv)
 
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
-    if request.method == 'GET':
-    	token_sent = request.args.get("hub.verify_token")
-    	return verify_fb_token(token_sent)
-    else:
-    	output = request.get_json()
-    	for event in output['entry']:
-    		messaging = event['messaging']
-    		for message in messaging:
-    			if message.get('message'):
-    				recipient_id = message['sender']['id']
-    				if message['message'].get('text'):
-    					response_sent_text = get_message(message['message'].get('text'))
-    					send_message(recipient_id, response_sent_text)
-    				if message['message'].get('attachments'):
-    					response_sent_nontext = random.choice(PICTURE_COMMENTS)
-    					send_message(recipient_id, response_sent_nontext)
-    return "Message Processed"
+	if request.method == 'GET':
+		token_sent = request.args.get("hub.verify_token")
+		return verify_fb_token(token_sent)
+	else:
+		output = request.get_json()
+		for event in output['entry']:
+			messaging = event['messaging']
+			for message in messaging:
+				if message.get('message'):
+					recipient_id = message['sender']['id']
+					if message['message'].get('text'):
+						response_sent_text = get_message(message['message'].get('text'))
+						send_message(recipient_id, response_sent_text)
+					if message['message'].get('attachments'):
+						response_sent_nontext = random.choice(PICTURE_COMMENTS)
+						send_message(recipient_id, response_sent_nontext)
+	return "Message Processed"
 
 @app.route("/privacy_policy",methods=['GET','POST'])
 def showPrivacy():
@@ -71,61 +71,68 @@ def verify_fb_token(token_sent):
 	return 'Invalid verification token'
 
 def findISO(lang):
-    """
-        Finds ISO code for the given language
-    """
-    for isoLanguage in ISOLANGUAGES:
-        if isoLanguage["name"] == lang.capitalize():
-            return isoLanguage["code"]
-    return None
+	"""
+		Finds ISO code for the given language
+	"""
+	for isoLanguage in ISOLANGUAGES:
+		if isoLanguage["name"] == lang.capitalize():
+			return isoLanguage["code"]
+	return None
 
 def getTemp(cityName):
-    """
-        Function to find temp of the given city
-    """
-    PARAMS = {'address':cityName} 
-    r = requests.get(url = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=6499100078bb92ae61e51355bc6f38db", params = PARAMS) 
-    data = r.json()
-    temp = data['main']['temp']
-    weather = data['weather'][0]['main']
-    return temp,weather
+	"""
+		Function to find temp of the given city
+	"""
+	PARAMS = {'address':cityName} 
+	r = requests.get(url = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=6499100078bb92ae61e51355bc6f38db", params = PARAMS) 
+	data = r.json()
+	temp = data['main']['temp']
+	weather = data['weather'][0]['main']
+	return temp,weather
 
 def handleFunction(command,func):
-    """
-        Function to calculate, Translate
-    """
-    try:
-        # re.search(r"(?i)"+func,' '.join(SET_OF_FUNCTIONS))
-        if("calculate" == func.lower()):
-            func,command = command.split()
-            try:
-                return eval(command)
-            except:
-                return "Sorry! We are unable to calculate this expression."
+	"""
+		Function to calculate, Translate
+	"""
+	try:
+		# re.search(r"(?i)"+func,' '.join(SET_OF_FUNCTIONS))
+		if("calculate" == func.lower()):
+			func,command = command.split()
+			try:
+				return eval(command)
+			except:
+				return "Sorry! We are unable to calculate this expression."
 
-        elif("translate" == func.lower()):
-            command = re.split(r'\s',command)
-            isoLan = findISO(command[len(command)-1])
-            if isoLan == None:
-                translation = "Sorry! we are unable to translate into this language"
-                return translation
-            translator= Translator(to_lang=isoLan)
-            translation = translator.translate(' '.join(command[1:len(command)-2]))
-            return translation
+		elif("translate" == func.lower()):
+			command = re.split(r'\s',command)
+			isoLan = findISO(command[len(command)-1])
+			if isoLan == None:
+				translation = "Sorry! we are unable to translate into this language"
+				return translation
+			translator= Translator(to_lang=isoLan)
+			translation = translator.translate(' '.join(command[1:len(command)-2]))
+			return translation
 
-        elif("temperature" == func.lower() or "weather" == func.lower()):
-            command = re.split(r'\s',command)
-            cityName = (command[len(command)-1]).capitalize()
-            temp = getTemp(cityName)
-            if temp:
-                temp_in_celcius = "It is "+str(round(temp[0]-273,2))+" C, "+temp[1]
-                return temp_in_celcius
-            return "Sorry we are unable to calculate temperature at this moment. Please try after sometime." 
-        
-        else:
-            return None
-    except:
-        return None
+		elif("temperature" == func.lower() or "weather" == func.lower()):
+			command = re.split(r'\s',command)
+			cityName = (command[len(command)-1]).capitalize()
+			temp = getTemp(cityName)
+			if temp:
+				temp_in_celcius = "It is "+str(round(temp[0]-273,2))+" C, "+temp[1]
+				return temp_in_celcius
+			return "Sorry we are unable to calculate temperature at this moment. Please try after sometime."
+
+		elif re.search(r"(.)* ?horoscope ?(.)*",command,re.I):
+			for sign in ZODIAC_SIGNS:
+				if re.search(r'\b'+sign+r'\b',s,re.I):
+					zodiac_sign = re.search(r'\b'+sign+r'\b',s,re.I).group(0)
+					API_response = requests.get(url = "http://horoscope-api.herokuapp.com/horoscope/today/"+zodiac_sign)
+					return API_response.json()['horoscope']
+			return "Please choose appropriate zodiac sign"
+		else:
+			return None
+	except:
+		return None
 
 #chooses a random message to send to the user
 def get_message(command):
@@ -150,12 +157,12 @@ def get_message(command):
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
-    #sends user the text message provided via input response parameter
-    bot.send_text_message(recipient_id, response)
-    return "success"
+	#sends user the text message provided via input response parameter
+	bot.send_text_message(recipient_id, response)
+	return "success"
 
 # --------------------------------------------DRIVER PROGRAM---------------------------
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+	port = int(os.environ.get('PORT', 5000))
+	app.run(host='0.0.0.0', port=port)
