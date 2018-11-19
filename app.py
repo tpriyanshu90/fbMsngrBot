@@ -1,5 +1,5 @@
 import random
-from flask import Flask, request
+from flask import Flask, request, Response
 from pymessenger.bot import Bot
 import os
 import time
@@ -58,12 +58,11 @@ def receive_message():
 @app.route("/privacy_policy",methods=['GET','POST'])
 def showPrivacy():
 	if request.method =='GET':
-		with open("privacy_policy") as fout:
-			temp = fout.read()
+		content = open('private_policy.html')
+		return Response(content, mimetype="text/html")
 	else:
-		with open("privacy_policy") as fout:
-			temp = fout.read()
-	return temp
+		content = get_file('private_policy.html')
+		return Response(content, mimetype="text/html")
 
 def verify_fb_token(token_sent):
 	if token_sent == VERIFY_TOKEN:
@@ -154,7 +153,7 @@ def get_message(command):
 
 	if re.search(r"(?i)"+command," ".join(PRAISES)):
 		response = random.choice(PRAISES_RESPONSE)
-	
+
 	if response==None:
 		response = chatbot.get_response(command)
 	return str(response)
