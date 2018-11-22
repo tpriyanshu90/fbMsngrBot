@@ -1,6 +1,6 @@
 # Project Title
 
-AI bot for facebook messenger
+AI bot for facebook messenger. It can calculate, translate, find weather, look for horoscope and can chat.
 
 ## Getting Started
 
@@ -23,33 +23,29 @@ Say what the step will be
 ```
 see the list of modules to be isntalled from requirements.txt
 
-to install execute: pip install module_name
+to install execute: pip install -r requirements.txt
 ```
 
-And repeat
 
-```
-until finished
-```
+## Deployment
 
-End with an example of getting some data out of the system or using it for a little demo
+Build you facebook app and get the ACCESS token and VERIFY token and replace it in the file.
+
 
 ## Running the tests
 
 python app.py
 
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
 * Python Flask Web Framework
 
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](*****) for details on our code of conduct, and the process for submitting pull requests to us.
+
 
 ## Versioning
 
