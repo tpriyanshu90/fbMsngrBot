@@ -14,8 +14,8 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'EAAEx8zel9AIBANiZAlfM430LS7Gynj5x84dMLyTjsb62YS33pbzOMVvo8J9p5BM8A2MWDzPV0g0LrxEjqbR1xcoaU0lyNw91eUCoJVUKOAwSvGU1ZAgnWvUZAk72GIuy7dhnJfDt67Jg6r3ReZASGqkaGDKfpfcLddMhlN9stgZDZD'
-VERIFY_TOKEN = 'awesomeWorked123986234'
+ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN'
+VERIFY_TOKEN = 'YOUR_VERIFY_TOKEN'
 bot = Bot(ACCESS_TOKEN)
 
 chatbot = ChatBot('Motibot')
