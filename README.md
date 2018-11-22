@@ -1,4 +1,4 @@
-# Project Title
+# Facebook Messenger Bot
 
 AI bot for facebook messenger. It can calculate, translate, find weather, look for horoscope and can chat.
 
