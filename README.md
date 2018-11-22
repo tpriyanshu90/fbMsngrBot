@@ -18,10 +18,8 @@ python >=3
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
-
 ```
-see the list of modules to be isntalled from requirements.txt
+see the list of modules to be installed from requirements.txt
 
 to install execute: pip install -r requirements.txt
 ```
